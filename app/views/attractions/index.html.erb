@@ -1,2 +1,5 @@
 <h1>Attraction Index</h1>
-<%= render partial: 'attraction_link', collection: @attractions %>
+<% if is_admin?(@current_user) %>
+  <%= link_to "New Attraction", new_attraction_path %>
+<% end %>
+<%= render partial: 'attraction_link', collection: @attractions, as: :attraction %>

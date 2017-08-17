@@ -1,16 +1,15 @@
 class SessionsController < ApplicationController
-  
-  before_action :new, :create do
-    @current_user = current_user
-  end
+
+  before_action :current_user, except: [:delete]
 
   def new
 
   end
 
   def create
-    @user = User.find_by(signin_name)
-    if @user.present? && @user.authenticate(signin_password)
+    @user = User.find_by(name_param)
+    if @user.present? && @user.authenticate(password_param[:password])
+      session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
       flash[:error] = "Name or password incorrect, try again."
@@ -25,11 +24,11 @@ class SessionsController < ApplicationController
 
   private
 
-  def signin_name
+  def name_param
     params.require(:user).permit(:name)
   end
 
-  def signin_password
+  def password_param
     params.require(:user).permit(:password)
   end
 

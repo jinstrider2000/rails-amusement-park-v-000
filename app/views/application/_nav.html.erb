@@ -1,8 +1,11 @@
 <% if @current_user.blank? %>
-  <%= link_to "Sign In", signin_path %>
-  <%= link_to "Sign Up", signup_path do %>
+  <li><%= link_to "Sign In", signin_path %></li>
+  <li><%= link_to "Sign Up", signup_path %></li>
 <% else %>
-  <span>Hello, <%= "ADMIN" if is_admin?(@current_user) %> <%= link_to @current_user.name, user_path(@current_user) %>!</span>
-  <%= link_to "See attractions", attractions_path %>
-  <%= link_to "Log Out", signout_path, method: :delete %>
+  <% if is_admin?(@current_user) %>
+    <li><%= link_to "ADMIN", "#" %></li>
+  <% end %>
+  <li><%= link_to @current_user.name, user_path(@current_user) %></li>
+  <li><%= link_to "Attractions", attractions_path %></li>
+  <li><%= link_to "Log Out", signout_path, method: :delete %></li>
 <% end %>

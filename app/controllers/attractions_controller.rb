@@ -1,12 +1,9 @@
 class AttractionsController < ApplicationController
   
-  before_action :show, :edit, :update do
-    @current_user = current_user
-    @attraction = Attraction.find_by(params[:id])
-  end
+  before_action :current_user, except: [:create, :update]
+  before_action :set_attraction, only: [:show, :edit, :update]
 
   def new
-    @current_user = current_user
     @attraction = Attraction.new
   end
 
@@ -20,7 +17,7 @@ class AttractionsController < ApplicationController
   end
 
   def show
-    
+
   end
 
   def edit
@@ -36,6 +33,10 @@ class AttractionsController < ApplicationController
 
   def attraction_params
     params.require(:attraction).permit(:name,:min_height,:nausea_rating,:happiness_rating,:tickets)
+  end
+
+  def set_attraction
+    @attraction = Attraction.find_by(id: params[:id])
   end
 
 end

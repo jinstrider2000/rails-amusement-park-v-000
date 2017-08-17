@@ -4,7 +4,7 @@
   <p><%= flash[:error] %></p>
 <% end %>
 
-<%= form_tag '/signin' do %>
+<%= form_tag signin_path do %>
   <%= label :user, :name %>
   <%= text_field :user, :name %>
   <br>
