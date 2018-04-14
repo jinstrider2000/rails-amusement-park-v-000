@@ -18,6 +18,9 @@
   <%= f.label :happiness %>
   <%= f.text_field :happiness %>
   <br>
+  <%= f.label :created_at %>
+  <%= f.date_select :created_at, default: Date.today, order: [:month, :day, :year], date_separator: "/ ", start_year: Date.today.year - 20, end_year: Date.today.year %>
+  <br>
   <%= f.label :admin, "Administrator?" %>
   <%= f.check_box :admin %>
   <br>
